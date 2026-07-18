@@ -52,9 +52,9 @@
             height: 100%;
             z-index: 100;
             display: flex;
-            transition: opacity 0.8s ease;
             opacity: 1;
             pointer-events: all;
+            transition: opacity 0.8s ease;
         }
         .door-overlay.hidden {
             opacity: 0;
@@ -64,14 +64,16 @@
             width: 50%;
             height: 100%;
             background: linear-gradient(135deg, #F5E6D3 0%, #E8D5B7 100%);
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            transform-origin: left;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.08);
+            border: 2px solid #C9A96E;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #C9A96E;
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .door-left {
+            transform-origin: left;
+            border-right: none;
         }
         .door-right {
             transform-origin: right;
@@ -117,8 +119,8 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: 0.3s;
             box-shadow: 0 8px 20px rgba(184,148,79,0.3);
+            transition: transform 0.3s, background 0.3s;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
@@ -126,11 +128,8 @@
             70% { box-shadow: 0 0 0 15px rgba(184,148,79,0); }
             100% { box-shadow: 0 0 0 0 rgba(184,148,79,0); }
         }
-        .open-btn:active {
-            transform: scale(0.97);
-        }
 
-        /* Main invitation container */
+        /* Invitation container */
         .invitation-container {
             position: relative;
             z-index: 1;
@@ -140,8 +139,8 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: opacity 0.8s ease;
             pointer-events: none;
+            transition: opacity 0.8s ease;
             padding: 20px;
         }
         .invitation-container.visible {
@@ -153,7 +152,6 @@
         .pages-wrapper {
             width: 100%;
             max-width: 600px;
-            position: relative;
         }
         .page {
             display: none;
@@ -174,6 +172,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Navigation */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -181,7 +180,7 @@
             gap: 10px;
         }
         .nav-btn {
-            background: rgba(201,169,110,0.2);
+            background: rgba(201,169,110,0.15);
             border: 1px solid #C9A96E;
             color: #3E2C1B;
             padding: 10px 20px;
@@ -196,10 +195,6 @@
         .nav-btn:disabled {
             opacity: 0.4;
             cursor: default;
-        }
-        .nav-btn:not(:disabled):active {
-            background: #C9A96E;
-            color: white;
         }
         .page-indicator {
             display: flex;
@@ -229,7 +224,6 @@
             height: 45px;
             border-radius: 50%;
             background: rgba(201,169,110,0.85);
-            backdrop-filter: blur(5px);
             border: 2px solid #D4C9A8;
             color: white;
             font-size: 1.3rem;
@@ -239,11 +233,6 @@
             cursor: pointer;
             z-index: 200;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
-        .music-toggle:active {
-            background: #B8944F;
-            transform: scale(1.1);
         }
 
         /* Countdown */
@@ -273,7 +262,7 @@
             color: #6B5D4F;
         }
 
-        /* Buttons */
+        /* Action buttons */
         .action-btn {
             display: inline-block;
             background: #C9A96E;
@@ -295,17 +284,7 @@
             border: 1px solid #C9A96E;
             color: #3E2C1B;
         }
-        .action-btn:active {
-            background: #B8944F;
-            color: white;
-            transform: translateY(-1px);
-        }
 
-        .quote-arabic {
-            font-size: 1.8rem;
-            color: #B8944F;
-            margin: 15px 0;
-        }
         .heart {
             color: #C9A96E;
             font-size: 1.5rem;
@@ -413,161 +392,164 @@
         </div>
     </div>
 
+    <!-- Audio element -->
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Particles
         (function() {
-            const container = document.getElementById('particles');
+            // ------------------- Particles -------------------
+            const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 35; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
+                const particle = document.createElement('div');
+                particle.className = 'particle';
                 const size = Math.random() * 6 + 2;
-                p.style.width = p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 8 + 8) + 's';
-                p.style.animationDelay = Math.random() * 8 + 's';
-                container.appendChild(p);
+                particle.style.width = particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particlesContainer.appendChild(particle);
             }
-        })();
 
-        // Door, music, invitation
-        const doorOverlay = document.getElementById('doorOverlay');
-        const doorLeft = document.getElementById('doorLeft');
-        const doorRight = document.getElementById('doorRight');
-        const openBtn = document.getElementById('openBtn');
-        const invitationContainer = document.getElementById('invitationContainer');
-        const bgMusic = document.getElementById('bgMusic');
-        const musicToggle = document.getElementById('musicToggle');
-        let musicPlaying = false;
+            // ------------------- Door & Music -------------------
+            const doorOverlay = document.getElementById('doorOverlay');
+            const doorLeft = document.getElementById('doorLeft');
+            const doorRight = document.getElementById('doorRight');
+            const openBtn = document.getElementById('openBtn');
+            const invitationContainer = document.getElementById('invitationContainer');
+            const bgMusic = document.getElementById('bgMusic');
+            const musicToggle = document.getElementById('musicToggle');
+            let musicPlaying = false;
 
-        openBtn.addEventListener('click', function() {
-            doorLeft.classList.add('open');
-            doorRight.classList.add('open');
-            // Try to play music
-            bgMusic.play().then(function() {
-                musicPlaying = true;
-                musicToggle.textContent = '🔊';
-            }).catch(function() {
-                // Autoplay blocked – user can tap the toggle
-            });
-            setTimeout(function() {
-                doorOverlay.classList.add('hidden');
-                invitationContainer.classList.add('visible');
-            }, 1000);
-        });
-
-        musicToggle.addEventListener('click', function() {
-            if (musicPlaying) {
-                bgMusic.pause();
-                musicToggle.textContent = '🎵';
-            } else {
+            openBtn.addEventListener('click', function() {
+                doorLeft.classList.add('open');
+                doorRight.classList.add('open');
+                // Try to play music
                 bgMusic.play().then(function() {
+                    musicPlaying = true;
                     musicToggle.textContent = '🔊';
-                }).catch(function(){});
-                musicToggle.textContent = '🔊';
-            }
-            musicPlaying = !musicPlaying;
-        });
-
-        // Page navigation
-        const pages = document.querySelectorAll('.page');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const dots = document.querySelectorAll('.dot');
-        let currentPage = 0;
-
-        function showPage(index) {
-            pages.forEach(function(p) { p.classList.remove('active'); });
-            pages[index].classList.add('active');
-            dots.forEach(function(d) { d.classList.remove('active'); });
-            dots[index].classList.add('active');
-            prevBtn.disabled = (index === 0);
-            nextBtn.textContent = (index === pages.length - 1) ? 'Finish' : 'Next →';
-            currentPage = index;
-        }
-
-        prevBtn.addEventListener('click', function() {
-            if (currentPage > 0) showPage(currentPage - 1);
-        });
-
-        nextBtn.addEventListener('click', function() {
-            if (currentPage < pages.length - 1) {
-                showPage(currentPage + 1);
-            } else {
-                alert('JazakAllahu Khair! Thank you for viewing our invitation.');
-            }
-        });
-
-        dots.forEach(function(dot) {
-            dot.addEventListener('click', function() {
-                const pageNum = parseInt(dot.getAttribute('data-page')) - 1;
-                showPage(pageNum);
+                }).catch(function() {
+                    // Autoplay prevented, user can tap toggle
+                });
+                setTimeout(function() {
+                    doorOverlay.classList.add('hidden');
+                    invitationContainer.classList.add('visible');
+                }, 1000);
             });
-        });
 
-        // Countdown
-        const weddingDate = new Date('2026-09-05T20:00:00+05:30').getTime();
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            if (distance < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
+            musicToggle.addEventListener('click', function() {
+                if (musicPlaying) {
+                    bgMusic.pause();
+                    musicToggle.textContent = '🎵';
+                } else {
+                    bgMusic.play().then(function() {
+                        musicToggle.textContent = '🔊';
+                    }).catch(function() {
+                        // Handle play error
+                    });
+                    musicToggle.textContent = '🔊';
+                }
+                musicPlaying = !musicPlaying;
+            });
+
+            // ------------------- Page Navigation -------------------
+            const pages = document.querySelectorAll('.page');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.dot');
+            let currentPage = 0;
+
+            function showPage(index) {
+                pages.forEach(p => p.classList.remove('active'));
+                pages[index].classList.add('active');
+                dots.forEach(d => d.classList.remove('active'));
+                dots[index].classList.add('active');
+                prevBtn.disabled = (index === 0);
+                nextBtn.textContent = (index === pages.length - 1) ? 'Finish' : 'Next →';
+                currentPage = index;
             }
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
 
-        // Copy address with fallback
-        document.getElementById('copyAddressBtn').addEventListener('click', function() {
-            const address = "Classic Banquet Hall, No.831, 4th Block, HBR Layout, Bangalore 560043";
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(address).then(function() {
+            prevBtn.addEventListener('click', function() {
+                if (currentPage > 0) showPage(currentPage - 1);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (currentPage < pages.length - 1) {
+                    showPage(currentPage + 1);
+                } else {
+                    alert('JazakAllahu Khair! Thank you for viewing our invitation.');
+                }
+            });
+
+            dots.forEach(function(dot) {
+                dot.addEventListener('click', function() {
+                    const pageNum = parseInt(dot.getAttribute('data-page')) - 1;
+                    showPage(pageNum);
+                });
+            });
+
+            // ------------------- Countdown Timer -------------------
+            const weddingDate = new Date('2026-09-05T20:00:00+05:30').getTime();
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                if (distance < 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // ------------------- Copy Address -------------------
+            document.getElementById('copyAddressBtn').addEventListener('click', function() {
+                const address = "Classic Banquet Hall, No.831, 4th Block, HBR Layout, Bangalore 560043";
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(address).then(function() {
+                        const btn = document.getElementById('copyAddressBtn');
+                        btn.textContent = '✅ Copied!';
+                        setTimeout(function() { btn.textContent = '📋 Copy Address'; }, 2000);
+                    }).catch(function() {
+                        fallbackCopy(address);
+                    });
+                } else {
+                    fallbackCopy(address);
+                }
+            });
+
+            function fallbackCopy(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
                     const btn = document.getElementById('copyAddressBtn');
                     btn.textContent = '✅ Copied!';
                     setTimeout(function() { btn.textContent = '📋 Copy Address'; }, 2000);
-                }).catch(function() {
-                    fallbackCopy(address);
-                });
-            } else {
-                fallbackCopy(address);
+                } catch (e) {
+                    alert('Copy failed. Please manually copy the address.');
+                }
+                document.body.removeChild(textarea);
             }
-        });
 
-        function fallbackCopy(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                const btn = document.getElementById('copyAddressBtn');
-                btn.textContent = '✅ Copied!';
-                setTimeout(function() { btn.textContent = '📋 Copy Address'; }, 2000);
-            } catch (err) {
-                alert('Copy failed. Please manually copy the address.');
-            }
-            document.body.removeChild(textarea);
-        }
-
-        // Initialize first page
-        showPage(0);
+            // Initialize first page
+            showPage(0);
+        })();
     </script>
 </body>
 </html>

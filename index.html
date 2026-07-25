@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Suhail & Taskeen Fathima | Valima Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: #2E2416;
+            background: #FDF8F0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="%23C9A96E" stroke-width="1.5" opacity="0.4"/><circle cx="50" cy="50" r="25" fill="none" stroke="%23B8944F" stroke-width="1.5" opacity="0.3"/><circle cx="50" cy="50" r="8" fill="%23C9A96E" opacity="0.6"/></svg>');
+            background-size: 150px 150px;
+            overflow-x: hidden;
+        }
+        /* Sparkles */
+        .particles {
+            position: fixed; top:0;left:0;width:100%;height:100%; pointer-events:none; z-index:1;
+        }
+        .particle {
+            position: absolute; border-radius: 50%; animation: floatUp linear infinite;
+        }
+        .particle.gold { background: rgba(201,169,110,0.8); box-shadow:0 0 10px #C9A96E; }
+        .particle.white { background: rgba(255,255,240,0.9); box-shadow:0 0 6px #FFFFF0; }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity:0; }
+            20% { opacity:1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity:0; }
+        }
+
+        /* Envelope */
+        #cover {
+            position: fixed; inset:0; z-index:50;
+            display:flex; align-items:center; justify-content:center;
+            background: rgba(253,248,240,0.95); backdrop-filter: blur(20px);
+            transition: opacity 0.8s;
+        }
+        #cover.hidden { opacity:0; pointer-events:none; }
+        .envelope {
+            width: 300px; height: 200px;
+            background: linear-gradient(135deg, #fffdf7, #e5cd9b);
+            border-radius: 24px; border: 2px solid #cda45d;
+            box-shadow: 0 30px 70px rgba(150,120,70,0.3);
+            display:flex; align-items:center; justify-content:center;
+        }
+        .seal {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #d4a74e, #b88a35);
+            color: white; font-family: 'Great Vibes', cursive;
+            font-size: 34px; display:flex; align-items:center; justify-content:center;
+            cursor: pointer; box-shadow: 0 12px 30px rgba(184,138,53,0.5);
+        }
+
+        /* Doors – simple fade+scale */
+        #doors {
+            position: fixed; inset:0; z-index:40;
+            display:none; align-items:center; justify-content:center;
+            background: rgba(255,255,240,0.85);
+            backdrop-filter: blur(15px);
+        }
+        #doors.visible { display:flex; }
+        .door-panel {
+            background: rgba(245,230,211,0.9);
+            border: 3px solid #b88a35;
+            padding: 40px 25px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transition: transform 1s, opacity 1s;
+        }
+        .door-panel.open {
+            transform: scale(0.8); opacity:0; pointer-events:none;
+        }
+        .door-panel .arabic { font-size: 2rem; color: #b88a35; }
+        .door-panel h1 { font-family:'Great Vibes',cursive; font-size:3.5rem; color:#b88a35; margin:15px 0; }
+        .door-panel p { font-size:1.2rem; margin-bottom:25px; }
+        .door-panel button {
+            background: #b88a35; color: white; border: none;
+            padding: 14px 40px; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem; letter-spacing: 3px;
+            text-transform: uppercase; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(184,138,53,0.4);
+        }
+
+        /* Pop‑up invitation */
+        #mainContent {
+            position: fixed; inset:0; z-index:30;
+            display:flex; align-items:center; justify-content:center;
+            opacity:0; pointer-events:none; transition: opacity 0.8s;
+            padding: 20px;
+        }
+        #mainContent.visible { opacity:1; pointer-events:all; }
+        .invitation-frame {
+            background: rgba(255,252,245,0.6);
+            backdrop-filter: blur(15px);
+            border: 3px solid #cda45d;
+            border-radius: 30px;
+            max-width: 550px; width:100%; max-height:85vh;
+            overflow-y:auto; padding:30px 20px;
+            box-shadow: 0 30px 70px rgba(150,120,70,0.4);
+        }
+        .section-card {
+            text-align: center; padding:25px 15px;
+            border-bottom: 1px solid rgba(212,201,168,0.4);
+        }
+        .section-card:last-child { border-bottom:none; }
+        .no-divider { border-bottom: none !important; }
+        .bismillah { font-size: 2rem; color:#B8944F; }
+        .heart { color:#C9A96E; font-size:1.8rem; margin:10px 0; }
+        .couple-name { font-family:'Great Vibes',cursive; font-size:3rem; color:#2E2416; margin:10px 0; }
+        .and-symbol { font-family:'Great Vibes',cursive; font-size:2.4rem; color:#C9A96E; }
+        .section-title { font-family:'Great Vibes',cursive; font-size:2.8rem; color:#B8944F; margin-bottom:20px; }
+        .countdown { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin:20px 0; }
+        .countdown-item { background:rgba(201,169,110,0.4); border-radius:12px; padding:15px 10px; width:75px; }
+        .countdown-number { font-family:'Montserrat',sans-serif; font-size:2rem; font-weight:600; color:#B8944F; }
+        .gold-btn {
+            background:#C9A96E; color:white; border:none; padding:12px 24px; border-radius:30px;
+            font-family:'Montserrat',sans-serif; font-size:0.8rem; letter-spacing:2px;
+            text-transform:uppercase; cursor:pointer; text-decoration:none; display:inline-block; margin:5px;
+        }
+        .outline-btn { background:transparent; border:2px solid #C9A96E; color:#2E2416; font-weight:600; }
+        .music-toggle {
+            position:fixed; bottom:25px; right:25px; width:48px; height:48px; border-radius:50%;
+            background:rgba(201,169,110,0.9); border:2px solid #D4C9A8; color:white;
+            font-size:1.4rem; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:200;
+        }
+        .scratch-container { position:relative; display:inline-block; margin:20px 0; }
+        .scratch-content { font-family:'Montserrat',sans-serif; font-weight:600; color:#B8944F; background:rgba(255,252,245,0.8); padding:20px 30px; border-radius:12px; border:2px solid #C9A96E; }
+        .scratch-content .date-top { font-size:2rem; display:block; }
+        .scratch-content .time-bottom { font-size:1.5rem; display:block; color:#8B7355; }
+        .scratch-canvas { position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; border-radius:12px; }
+
+        @media (max-width:480px) {
+            .couple-name { font-size:2.5rem; }
+            .section-title { font-size:2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <!-- ENVELOPE -->
+    <div id="cover">
+        <div class="envelope">
+            <div class="seal" onclick="openEnvelope()">S ❦ T</div>
+        </div>
+    </div>
+
+    <!-- DOORS (simplified) -->
+    <div id="doors">
+        <div class="door-panel" id="doorPanel">
+            <div class="arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            <h1>Welcome</h1>
+            <p>You are invited to celebrate our<br>Valima Reception</p>
+            <button id="openBtn">Open Invitation</button>
+        </div>
+    </div>
+
+    <!-- Music toggle -->
+    <div class="music-toggle" id="musicToggle">🎵</div>
+
+    <!-- POP‑UP INVITATION -->
+    <div id="mainContent">
+        <div class="invitation-frame">
+            <div class="section-card no-divider" id="home">
+                <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+                <div class="heart">♥</div>
+                <p><em>"And We Created You In Pairs"<br>~Quran 78:8</em></p>
+                <p style="font-weight:600; letter-spacing:2px; margin:15px 0;">WITH THE BLESSINGS OF ALLAH<br>AND OUR BELOVED PARENTS</p>
+                <div style="font-size:1.8rem; color:#C9A96E;">✦</div>
+                <p>We joyfully invite you to celebrate<br>the Nikah & Reception of</p>
+                <h1 class="couple-name">Syed Suhail</h1>
+                <p class="and-symbol">&</p>
+                <h1 class="couple-name">Taskeen Fathima</h1>
+                <div class="heart">♥</div>
+                <p><em>Two Souls. One Journey.<br>A Lifetime Of Love & Faith.</em></p>
+            </div>
+
+            <div class="section-card" id="story">
+                <h2 class="section-title">Our Story</h2>
+                <p>Two souls destined to meet, by the will of Allah.</p>
+                <p>From the first glance to the blessed Nikah, every moment has been a beautiful journey of faith and love.</p>
+                <p>We thank Allah for bringing us together and can't wait to start this new chapter with your blessings.</p>
+                <p><em>"And He has placed between you affection and mercy." <br>— Quran 30:21</em></p>
+            </div>
+
+            <div class="section-card" id="countdown">
+                <h2 class="section-title">Counting Down</h2>
+                <div class="countdown" id="countdownTimer">
+                    <div class="countdown-item"><span class="countdown-number" id="days">00</span><span>Days</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span>Hours</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span>Minutes</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span>Seconds</span></div>
+                </div>
+                <p>Until the blessed day</p>
+
+                <div class="scratch-container" id="scratchContainer">
+                    <div class="scratch-content" id="scratchContent">
+                        <span class="date-top">05 SEP 2026</span>
+                        <span class="time-bottom">08:00 PM Onwards</span>
+                    </div>
+                    <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+                </div>
+                <span style="text-transform:uppercase; letter-spacing:2px; color:#B8944F;">✨ Scratch to reveal ✨</span>
+            </div>
+
+            <div class="section-card" id="venue">
+                <h2 class="section-title">Venue</h2>
+                <p><strong>Classic Banquet Hall</strong></p>
+                <p>No.831, 4th Block, HBR Layout, Bangalore 560043</p>
+                <div style="margin-top:20px;">
+                    <button class="gold-btn outline-btn" id="copyAddressBtn">📋 Copy Address</button>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Classic+Banquet+Hall+No.831+4th+Block+HBR+Layout+Bangalore+560043" target="_blank" class="gold-btn">📍 Open Google Maps</a>
+                </div>
+            </div>
+
+            <div class="section-card" id="blessings">
+                <p><em>Two Souls. One Journey.<br>A Lifetime Of Love & Faith.</em></p>
+                <p>Your Presence Will Be<br>Our Greatest Blessing</p>
+                <p style="font-size:1.4rem;">Best Regards</p>
+                <p style="font-size:1.5rem; font-weight:600;">Syed's Family</p>
+                <p style="font-size:1.2rem;">JazakAllahu Khair</p>
+                <p>Thank You For Celebrating With Us</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- REAL VIOLIN MUSIC (plays instantly) -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Sparkles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle ' + (Math.random() > 0.5 ? 'gold' : 'white');
+            p.style.width = p.style.height = (Math.random() * 8 + 2) + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            particlesContainer.appendChild(p);
+        }
+
+        // Envelope -> Doors
+        function openEnvelope() {
+            document.getElementById('cover').classList.add('hidden');
+            document.getElementById('doors').classList.add('visible');
+        }
+        window.openEnvelope = openEnvelope;
+
+        // Doors -> Invitation + Music
+        document.getElementById('openBtn').addEventListener('click', function() {
+            alert('Doors opening… Enjoy the music!');  // DEBUG – tells you the button works
+
+            // Animate door panel
+            const panel = document.getElementById('doorPanel');
+            panel.classList.add('open');
+
+            // Play music
+            const music = document.getElementById('bgMusic');
+            music.play().then(() => {
+                document.getElementById('musicToggle').textContent = '🔊';
+            }).catch(() => {});
+
+            // Show invitation after animation
+            setTimeout(() => {
+                document.getElementById('doors').classList.remove('visible');
+                document.getElementById('mainContent').classList.add('visible');
+            }, 800);
+        });
+
+        // Music toggle
+        let musicPlaying = true;
+        document.getElementById('musicToggle').addEventListener('click', function() {
+            const music = document.getElementById('bgMusic');
+            if (musicPlaying) {
+                music.pause();
+                this.textContent = '🎵';
+            } else {
+                music.play();
+                this.textContent = '🔊';
+            }
+            musicPlaying = !musicPlaying;
+        });
+
+        // Countdown
+        const weddingDate = new Date('2026-09-05T20:00:00+05:30').getTime();
+        setInterval(() => {
+            const now = Date.now();
+            const diff = weddingDate - now;
+            if (diff < 0) return;
+            document.getElementById('days').textContent = String(Math.floor(diff / (1000*60*60*24))).padStart(2,'0');
+            document.getElementById('hours').textContent = String(Math.floor((diff % (1000*60*60*24)) / (1000*60*60))).padStart(2,'0');
+            document.getElementById('minutes').textContent = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2,'0');
+            document.getElementById('seconds').textContent = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2,'0');
+        }, 1000);
+
+        // Copy address
+        document.getElementById('copyAddressBtn').addEventListener('click', function() {
+            const address = "Classic Banquet Hall, No.831, 4th Block, HBR Layout, Bangalore 560043";
+            navigator.clipboard.writeText(address).then(() => {
+                this.textContent = '✅ Copied!';
+                setTimeout(() => { this.textContent = '📋 Copy Address'; }, 2000);
+            }).catch(() => alert('Copy failed.'));
+        });
+
+        // Scratch card
+        const canvas = document.getElementById('scratchCanvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            const rect = document.getElementById('scratchContent').getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            ctx.fillStyle = '#C9A96E';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = '#B8944F';
+            for (let i=0;i<30;i++) {
+                ctx.beginPath();
+                ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 2, 0, Math.PI*2);
+                ctx.fill();
+            }
+            ctx.font = '14px Montserrat';
+            ctx.fillStyle = '#FDF8F0';
+            ctx.textAlign = 'center';
+            ctx.fillText('Scratch here', canvas.width/2, canvas.height/2);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let isScratching = false;
+        function scratch(x,y) {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x,y,20,0,Math.PI*2);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+        }
+        canvas.addEventListener('mousedown', e => { isScratching=true; scratch(e.offsetX, e.offsetY); });
+        canvas.addEventListener('mousemove', e => { if(isScratching) scratch(e.offsetX, e.offsetY); });
+        canvas.addEventListener('mouseup', () => isScratching=false);
+        canvas.addEventListener('touchstart', e => { e.preventDefault(); isScratching=true; const rect=canvas.getBoundingClientRect(); scratch(e.touches[0].clientX-rect.left, e.touches[0].clientY-rect.top); });
+        canvas.addEventListener('touchmove', e => { e.preventDefault(); if(isScratching){ const rect=canvas.getBoundingClientRect(); scratch(e.touches[0].clientX-rect.left, e.touches[0].clientY-rect.top); } });
+        canvas.addEventListener('touchend', () => isScratching=false);
+    </script>
+</body>
+</html>

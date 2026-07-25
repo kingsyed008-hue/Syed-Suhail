@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Syed Suhail & Taskeen Fathima | Valima Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#fffaf2;
+color:#3b3025;
+font-family:'Cormorant Garamond',serif;
+overflow-x:hidden;
+}
+
+
+/* ======================
+OPENING SCREEN
+====================== */
+
+#opening{
+
+position:fixed;
+inset:0;
+
+background:
+radial-gradient(circle at top,
+#fff8e7,
+#ead7b0);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+z-index:9999;
+
+}
+
+
+/* Envelope */
+
+.envelope{
+
+width:330px;
+height:220px;
+
+background:
+linear-gradient(135deg,#fff8e8,#d2ae68);
+
+border-radius:20px;
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.25);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+position:relative;
+
+transition:1.5s;
+
+}
+
+
+.envelope.hide{
+
+transform:
+translateY(-300px)
+scale(.3);
+
+opacity:0;
+
+}
+
+
+.seal{
+
+width:90px;
+height:90px;
+
+border-radius:50%;
+
+background:#c79b45;
+
+color:white;
+
+font-family:'Great Vibes';
+
+font-size:38px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+cursor:pointer;
+
+box-shadow:
+0 0 35px #e6c777;
+
+animation:pulse 2s infinite;
+
+}
+
+
+@keyframes pulse{
+
+50%{
+transform:scale(1.12);
+}
+
+}
+
+
+
+.invite-text{
+
+position:absolute;
+
+bottom:-80px;
+
+text-align:center;
+
+color:#8c6b34;
+
+font-size:24px;
+
+}
+
+
+
+/* ======================
+HEAVEN DOORS
+====================== */
+
+
+#doors{
+
+position:absolute;
+
+inset:0;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:1s;
+
+}
+
+
+#doors.show{
+
+opacity:1;
+
+pointer-events:auto;
+
+}
+
+
+
+.door{
+
+position:absolute;
+
+top:0;
+
+width:50%;
+
+height:100%;
+
+
+background:
+linear-gradient(135deg,#fffdf8,#e4cd9c);
+
+
+border:3px solid #c79b45;
+
+
+transition:
+2s cubic-bezier(.7,-.5,.2,1.5);
+
+}
+
+
+.left-door{
+
+left:0;
+
+transform-origin:left;
+
+}
+
+
+.right-door{
+
+right:0;
+
+transform-origin:right;
+
+}
+
+
+.left-door.open{
+
+transform:
+perspective(1200px)
+rotateY(-110deg);
+
+}
+
+
+.right-door.open{
+
+transform:
+perspective(1200px)
+rotateY(110deg);
+
+}
+
+
+
+.door-content{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+text-align:center;
+
+z-index:10;
+
+}
+
+
+.door-content h1{
+
+font-family:'Great Vibes';
+
+font-size:75px;
+
+color:#c79b45;
+
+margin:20px;
+
+}
+
+
+.door-content p{
+
+font-size:25px;
+
+}
+
+
+button{
+
+border:none;
+
+background:#c79b45;
+
+color:white;
+
+padding:15px 40px;
+
+border-radius:40px;
+
+font-size:16px;
+
+letter-spacing:2px;
+
+cursor:pointer;
+
+margin-top:25px;
+
+}
+
+
+
+/* ======================
+MAIN INVITATION
+====================== */
+
+
+#main{
+
+display:none;
+
+text-align:center;
+
+}
+
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:30px;
+
+}
+
+
+.arabic{
+
+font-size:32px;
+
+color:#c79b45;
+
+}
+
+
+
+.names{
+
+font-family:'Great Vibes';
+
+font-size:85px;
+
+color:#b8862f;
+
+}
+
+
+
+.and{
+
+font-size:60px;
+
+color:#c79b45;
+
+}
+
+
+
+.section{
+
+min-height:60vh;
+
+padding:40px 20px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+.section h2{
+
+font-family:'Great Vibes';
+
+font-size:55px;
+
+color:#b8862f;
+
+}
+
+
+.card{
+
+background:white;
+
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.12);
+
+font-size:25px;
+
+}
+
+<!-- MAIN INVITATION -->
+
+<div id="main">
+
+
+<section class="hero">
+
+<div>
+
+<div class="arabic">
+بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+</div>
+
+
+<p style="font-size:25px;margin:25px;">
+"And We Created You In Pairs"
+<br>
+— Quran 78:8
+</p>
+
+
+<div class="names">
+Syed Suhail
+</div>
+
+
+<div class="and">
+&
+</div>
+
+
+<div class="names">
+Taskeen Fathima
+</div>
+
+
+<h2 style="color:#b8862f;margin-top:30px;">
+Valima Reception
+</h2>
+
+
+</div>
+
+</section>
+
+
+
+
+<section class="section">
+
+<h2>
+Counting Down
+</h2>
+
+
+<div class="card">
+
+<div id="timer">
+
+<span>
+<b id="days">00</b>
+<br>
+Days
+</span>
+
+&nbsp;&nbsp;
+
+<span>
+<b id="hours">00</b>
+<br>
+Hours
+</span>
+
+&nbsp;&nbsp;
+
+<span>
+<b id="minutes">00</b>
+<br>
+Minutes
+</span>
+
+&nbsp;&nbsp;
+
+<span>
+<b id="seconds">00</b>
+<br>
+Seconds
+</span>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+<section class="section">
+
+<h2>
+Valima Reception
+</h2>
+
+
+<div class="card">
+
+
+<p>
+Saturday
+</p>
+
+
+<h1 style="color:#b8862f;">
+05 September 2026
+</h1>
+
+
+<p>
+8:00 PM Onwards
+</p>
+
+
+</div>
+
+</section>
+
+
+
+
+<section class="section">
+
+
+<h2>
+Venue
+</h2>
+
+
+<div class="card">
+
+
+<b>
+Classic Banquet Hall
+</b>
+
+
+<br><br>
+
+
+<p>
+No.831, 4th Block
+<br>
+HBR Layout
+<br>
+Bangalore 560043
+</p>
+
+
+<br>
+
+
+<a href="https://www.google.com/maps/search/?api=1&query=Classic+Banquet+Hall+HBR+Layout+Bangalore"
+target="_blank">
+
+<button>
+📍 Open Maps
+</button>
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<section class="section">
+
+
+<h2>
+With Love
+</h2>
+
+
+<div class="card">
+
+
+<p>
+Your Presence Will Be Our Greatest Blessing
+</p>
+
+
+<br>
+
+
+<div class="names" style="font-size:60px;">
+Syed's Family
+</div>
+
+
+<p>
+JazakAllahu Khair
+</p>
+
+
+</div>
+
+
+</section>
+
+
+</div>
+
+
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+
+<source src="violin.mp3" type="audio/mpeg">
+
+</audio>
+
+
+<button id="musicBtn"
+style="
+position:fixed;
+right:25px;
+bottom:25px;
+width:60px;
+height:60px;
+border-radius:50%;
+z-index:9999;
+">
+
+🎻
+
+</button>
+
+
+
+
+<script>
+
+
+// Envelope open
+
+const seal=document.querySelector(".seal");
+
+const envelope=document.querySelector(".envelope");
+
+const doors=document.querySelector("#doors");
+
+
+seal.onclick=function(){
+
+
+envelope.classList.add("hide");
+
+
+setTimeout(()=>{
+
+doors.classList.add("show");
+
+},1200);
+
+
+};
+
+
+
+// Door open
+
+
+document.getElementById("openBtn").onclick=function(){
+
+
+document.querySelector(".left-door")
+.classList.add("open");
+
+
+document.querySelector(".right-door")
+.classList.add("open");
+
+
+setTimeout(()=>{
+
+
+document.getElementById("opening")
+.style.display="none";
+
+
+document.getElementById("main")
+.style.display="block";
+
+
+},2000);
+
+
+};
+
+
+
+
+// Countdown
+
+const wedding =
+new Date("September 5, 2026 20:00:00")
+.getTime();
+
+
+
+setInterval(()=>{
+
+
+let now=new Date().getTime();
+
+
+let gap=wedding-now;
+
+
+let d=Math.floor(
+gap/(1000*60*60*24)
+);
+
+
+let h=Math.floor(
+(gap%(1000*60*60*24))
+/(1000*60*60)
+);
+
+
+let m=Math.floor(
+(gap%(1000*60*60))
+/(1000*60)
+);
+
+
+let s=Math.floor(
+(gap%(1000*60))/1000
+);
+
+
+
+days.innerHTML=d;
+
+hours.innerHTML=h;
+
+minutes.innerHTML=m;
+
+seconds.innerHTML=s;
+
+
+},1000);
+
+
+
+
+// Music button
+
+let playing=false;
+
+const music=document.getElementById("music");
+
+
+document.getElementById("musicBtn")
+.onclick=function(){
+
+
+if(playing){
+
+music.pause();
+
+this.innerHTML="🎻";
+
+playing=false;
+
+}
+
+else{
+
+music.play();
+
+this.innerHTML="🔊";
+
+playing=true;
+
+}
+
+
+};
+
+
+
+</script>
+
+
+
+
+
+<!-- OPENING SCREEN -->
+
+<div id="opening">
+
+
+<div class="envelope">
+
+
+<div class="seal">
+S ❦ T
+</div>
+
+
+<div class="invite-text">
+
+✨ Wedding Invitation ✨
+<br>
+Tap the golden seal
+
+</div>
+
+
+</div>
+
+
+
+<div id="doors">
+
+
+<div class="door left-door"></div>
+
+<div class="door right-door"></div>
+
+
+
+<div class="door-content">
+
+
+<p>
+بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+</p>
+
+
+<h1>
+Welcome
+</h1>
+
+
+<p>
+You are invited to celebrate our
+<br>
+Valima Reception
+</p>
+
+
+<button id="openBtn">
+Open Invitation
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Suhail & Taskeen Fathima | Valima Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: #2E2416;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #FDF8F0;
+            /* Heritage pattern background */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="%23C9A96E" stroke-width="1.5" opacity="0.4"/><circle cx="50" cy="50" r="25" fill="none" stroke="%23B8944F" stroke-width="1.5" opacity="0.3"/><circle cx="50" cy="50" r="8" fill="%23C9A96E" opacity="0.6"/><path d="M50 5 L95 50 L50 95 L5 50 Z" fill="none" stroke="%23D4A373" stroke-width="0.8" opacity="0.3"/><circle cx="50" cy="50" r="40" fill="none" stroke="%23E8C98B" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/></svg>');
+            background-size: 150px 150px;
+            position: relative;
+        }
+
+        /* Warm overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(201, 169, 110, 0.05);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Sparkle particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+        }
+        .particle.gold {
+            background: rgba(201, 169, 110, 0.8);
+            box-shadow: 0 0 10px #C9A96E;
+        }
+        .particle.white {
+            background: rgba(255, 255, 240, 0.9);
+            box-shadow: 0 0 6px #FFFFF0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.8) rotate(360deg); opacity: 0; }
+        }
+
+        /* ---------- ENVELOPE COVER ---------- */
+        #cover {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(253, 248, 240, 0.95);
+            backdrop-filter: blur(20px);
+            transition: opacity 0.8s ease;
+            opacity: 1;
+            pointer-events: all;
+        }
+        #cover.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .envelope-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .envelope {
+            width: 320px;
+            height: 220px;
+            background: linear-gradient(135deg, #fffdf7, #e5cd9b);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 70px rgba(150, 120, 70, 0.3);
+            position: relative;
+            border: 2px solid #cda45d;
+        }
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 40px solid #f5e6d3;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+        .seal {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #d4a74e, #b88a35);
+            color: white;
+            font-family: 'Great Vibes', cursive;
+            font-size: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(184, 138, 53, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 2;
+            margin: 0 auto;
+        }
+        .seal:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(184, 138, 53, 0.7);
+        }
+
+        /* ---------- DOORS OVERLAY ---------- */
+        #doors {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            display: none;
+            pointer-events: all;
+            transition: opacity 0.8s ease;
+        }
+        #doors.visible {
+            display: block;
+        }
+        .door {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(135deg, #F5E6D3, #E8D5B7);
+            border: 3px solid #b88a35;
+            transition: transform 1.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .left {
+            left: 0;
+            transform-origin: left;
+            border-right: none;
+        }
+        .right {
+            right: 0;
+            transform-origin: right;
+            border-left: none;
+        }
+        .open-left {
+            transform: perspective(1500px) rotateY(-110deg);
+        }
+        .open-right {
+            transform: perspective(1500px) rotateY(110deg);
+        }
+        .door-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            color: #2E2416;
+            pointer-events: none;
+            width: 90%;
+        }
+        .door-text .arabic {
+            font-size: 2.2rem;
+            color: #b88a35;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .door-text h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #b88a35;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(255,255,240,0.8);
+        }
+        .door-text p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .door-text button {
+            pointer-events: all;
+            background: #b88a35;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(184, 138, 53, 0.4);
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(184, 138, 53, 0.4); }
+            70% { box-shadow: 0 0 0 18px rgba(184, 138, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(184, 138, 53, 0); }
+        }
+
+        /* ---------- MAIN CONTENT (pop‑up frame) ---------- */
+        #mainContent {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+            padding: 20px;
+        }
+        #mainContent.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .invitation-frame {
+            background: rgba(255, 252, 245, 0.85);
+            backdrop-filter: blur(15px);
+            border: 3px solid #cda45d;
+            border-radius: 30px;
+            box-shadow: 0 30px 70px rgba(150, 120, 70, 0.4);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px 20px;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+        /* Decorative inner border */
+        .invitation-frame::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid rgba(201, 169, 110, 0.4);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        /* Sections inside frame */
+        .section-card {
+            text-align: center;
+            padding: 30px 15px;
+            border-bottom: 1px solid rgba(212, 201, 168, 0.4);
+        }
+        .section-card:last-child {
+            border-bottom: none;
+        }
+
+        .bismillah {
+            font-size: 2rem;
+            color: #B8944F;
+            margin-bottom: 10px;
+        }
+        .heart {
+            color: #C9A96E;
+            font-size: 1.8rem;
+            margin: 10px 0;
+            text-shadow: 0 0 8px rgba(201,169,110,0.5);
+        }
+        .couple-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            color: #2E2416;
+            text-shadow: 0 2px 12px rgba(255,255,240,0.8);
+            margin: 10px 0;
+        }
+        .and-symbol {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            color: #C9A96E;
+        }
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #B8944F;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(255,255,240,0.8);
+        }
+        .quote {
+            font-style: italic;
+            color: #5A4A3A;
+            margin: 15px 0;
+        }
+
+        /* Countdown – equal boxes */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .countdown-item {
+            background: rgba(201,169,110,0.4);
+            border-radius: 12px;
+            padding: 15px 10px;
+            width: 75px;
+            min-width: 75px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(201,169,110,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .countdown-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #B8944F;
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #5A4A3A;
+        }
+
+        /* Buttons */
+        .gold-btn {
+            background: #C9A96E;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .gold-btn:active {
+            background: #B8944F;
+            transform: translateY(-1px);
+        }
+        .outline-btn {
+            background: transparent;
+            border: 2px solid #C9A96E;
+            color: #2E2416;
+            font-weight: 600;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Music toggle */
+        .music-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(201,169,110,0.9);
+            border: 2px solid #D4C9A8;
+            color: white;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Scratch card */
+        .scratch-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .scratch-content {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #B8944F;
+            background: rgba(255,252,245,0.8);
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 2px solid #C9A96E;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .scratch-content .date-top {
+            font-size: 2rem;
+            display: block;
+        }
+        .scratch-content .time-bottom {
+            font-size: 1.5rem;
+            display: block;
+            color: #8B7355;
+        }
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .scratch-hint {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: #B8944F;
+            margin-top: 5px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .blessing-text {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #2E2416;
+        }
+
+        @media (max-width: 480px) {
+            .couple-name { font-size: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .door-text h1 { font-size: 3rem; }
+            .invitation-frame { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sparkle particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- ENVELOPE COVER -->
+    <div id="cover">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="seal" onclick="openEnvelope()">S ❦ T</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOORS OVERLAY -->
+    <div id="doors">
+        <div class="door left" id="doorLeft"></div>
+        <div class="door right" id="doorRight"></div>
+        <div class="door-text">
+            <span class="arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
+            <h1>Welcome</h1>
+            <p>You are invited to celebrate our<br>Valima Reception</p>
+            <button id="openBtn">Open Invitation</button>
+        </div>
+    </div>
+
+    <!-- Music toggle -->
+    <div class="music-toggle" id="musicToggle">🎵</div>
+
+    <!-- MAIN CONTENT (pop‑up frame) -->
+    <div id="mainContent">
+        <div class="invitation-frame">
+            <!-- HOME SECTION -->
+            <div class="section-card" id="home">
+                <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+                <div class="heart">♥</div>
+                <p class="quote">"And We Created You In Pairs"<br>~Quran 78:8</p>
+                <p style="font-weight:600; letter-spacing:2px; margin:15px 0;">WITH THE BLESSINGS OF ALLAH<br>AND OUR BELOVED PARENTS</p>
+                <div style="font-size:1.8rem; color:#C9A96E;">✦</div>
+                <p style="margin:15px 0;">We joyfully invite you to celebrate<br>the Nikah & Reception of</p>
+                <h1 class="couple-name">Syed Suhail</h1>
+                <p class="and-symbol">&</p>
+                <h1 class="couple-name">Taskeen Fathima</h1>
+                <div class="heart">♥</div>
+                <p class="quote">Two Souls. One Journey.<br>A Lifetime Of Love & Faith.</p>
+            </div>
+
+            <!-- OUR STORY SECTION -->
+            <div class="section-card" id="story">
+                <h2 class="section-title">Our Story</h2>
+                <p style="font-size:1.2rem;">Two souls destined to meet, by the will of Allah.</p>
+                <p style="font-size:1.1rem;">From the first glance to the blessed Nikah, every moment has been a beautiful journey of faith and love.</p>
+                <p style="font-size:1.1rem;">We thank Allah for bringing us together and can't wait to start this new chapter with your blessings.</p>
+                <p class="quote" style="font-size:1.2rem;">"And He has placed between you affection and mercy." <br>— Quran 30:21</p>
+            </div>
+
+            <!-- COUNTDOWN + SCRATCH CARD SECTION -->
+            <div class="section-card" id="countdown">
+                <h2 class="section-title">Counting Down</h2>
+                <div class="countdown" id="countdownTimer">
+                    <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hours</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Minutes</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Seconds</span></div>
+                </div>
+                <p style="font-size:1.1rem;">Until the blessed day</p>
+
+                <!-- Scratch card inserted here -->
+                <div class="scratch-container" id="scratchContainer">
+                    <div class="scratch-content" id="scratchContent">
+                        <span class="date-top">05 SEP 2026</span>
+                        <span class="time-bottom">08:00 PM Onwards</span>
+                    </div>
+                    <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+                </div>
+                <span class="scratch-hint">✨ Scratch to reveal ✨</span>
+            </div>
+
+            <!-- VENUE SECTION -->
+            <div class="section-card" id="venue">
+                <h2 class="section-title">Venue</h2>
+                <p style="font-weight:600; font-size:1.2rem;">Classic Banquet Hall</p>
+                <p style="font-size:1.1rem;">No.831, 4th Block,<br>HBR Layout<br>Bangalore 560043</p>
+                <div style="display:flex; flex-direction:column; gap:10px; align-items:center; margin-top:20px;">
+                    <button class="gold-btn outline-btn" id="copyAddressBtn">📋 Copy Address</button>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Classic+Banquet+Hall+No.831+4th+Block+HBR+Layout+Bangalore+560043" target="_blank" class="gold-btn">📍 Open Google Maps</a>
+                </div>
+            </div>
+
+            <!-- BLESSINGS SECTION -->
+            <div class="section-card" id="blessings">
+                <p class="quote" style="font-size:1.2rem;">Two Souls. One Journey.<br>A Lifetime Of Love & Faith.</p>
+                <p style="font-size:1.2rem; margin:15px 0;">Your Presence Will Be<br>Our Greatest Blessing</p>
+                <p class="blessing-text">Best Regards</p>
+                <p style="font-size:1.5rem; font-weight:600; color:#2E2416;">Syed's Family</p>
+                <p class="blessing-text" style="margin-top:20px;">JazakAllahu Khair</p>
+                <p style="font-size:1.1rem;">Thank You For Celebrating With Us</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- Sparkle particles ----------
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 60; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle ' + (Math.random() > 0.5 ? 'gold' : 'white');
+                const size = Math.random() * 10 + 2;
+                p.style.width = p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 12 + 10) + 's';
+                p.style.animationDelay = Math.random() * 10 + 's';
+                particlesContainer.appendChild(p);
+            }
+
+            // ---------- Envelope to Doors ----------
+            const cover = document.getElementById('cover');
+            const doors = document.getElementById('doors');
+            const doorLeft = document.getElementById('doorLeft');
+            const doorRight = document.getElementById('doorRight');
+            const openBtn = document.getElementById('openBtn');
+            const mainContent = document.getElementById('mainContent');
+            const musicToggle = document.getElementById('musicToggle');
+
+            // Web Audio Music
+            let audioCtx = null;
+            let musicPlaying = false;
+            let gainNode = null;
+            let oscillatorNodes = [];
+
+            function createMelody() {
+                if (audioCtx) return;
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                gainNode = audioCtx.createGain();
+                gainNode.gain.value = 0.15;
+                gainNode.connect(audioCtx.destination);
+
+                function playNotes() {
+                    if (!musicPlaying) return;
+                    const notes = [
+                        { freq: 523.25, start: 0, dur: 0.5 },
+                        { freq: 659.25, start: 0.6, dur: 0.5 },
+                        { freq: 783.99, start: 1.2, dur: 0.5 },
+                        { freq: 659.25, start: 1.8, dur: 0.5 },
+                        { freq: 523.25, start: 2.4, dur: 1.0 },
+                        { freq: 440.00, start: 3.6, dur: 0.5 },
+                        { freq: 523.25, start: 4.2, dur: 0.5 },
+                        { freq: 659.25, start: 4.8, dur: 1.0 },
+                        { freq: 587.33, start: 6.0, dur: 0.5 },
+                        { freq: 523.25, start: 6.6, dur: 1.5 }
+                    ];
+                    const now = audioCtx.currentTime;
+                    notes.forEach(({ freq, start, dur }) => {
+                        const osc = audioCtx.createOscillator();
+                        const noteGain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + start);
+                        noteGain.gain.setValueAtTime(0, now + start);
+                        noteGain.gain.linearRampToValueAtTime(0.4, now + start + 0.05);
+                        noteGain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
+                        osc.connect(noteGain);
+                        noteGain.connect(gainNode);
+                        osc.start(now + start);
+                        osc.stop(now + start + dur);
+                        oscillatorNodes.push(osc);
+                    });
+                    if (musicPlaying) {
+                        setTimeout(playNotes, 8000);
+                    }
+                }
+                playNotes();
+            }
+
+            function startMusic() {
+                if (!musicPlaying) {
+                    if (!audioCtx) createMelody();
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                    musicPlaying = true;
+                    musicToggle.textContent = '🔊';
+                }
+            }
+
+            function stopMusic() {
+                musicPlaying = false;
+                musicToggle.textContent = '🎵';
+                oscillatorNodes.forEach(osc => {
+                    try { osc.stop(); } catch(e) {}
+                });
+                oscillatorNodes = [];
+                if (gainNode) gainNode.disconnect();
+                audioCtx = null;
+                gainNode = null;
+            }
+
+            window.openEnvelope = function() {
+                cover.classList.add('hidden');
+                doors.classList.add('visible');
+            };
+
+            openBtn.addEventListener('click', () => {
+                doorLeft.classList.add('open-left');
+                doorRight.classList.add('open-right');
+                startMusic();
+                setTimeout(() => {
+                    doors.style.display = 'none';
+                    mainContent.classList.add('visible');
+                }, 1800);
+            });
+
+            musicToggle.addEventListener('click', () => {
+                if (musicPlaying) {
+                    stopMusic();
+                } else {
+                    startMusic();
+                }
+            });
+
+            // ---------- Countdown Timer ----------
+            const weddingDate = new Date('2026-09-05T20:00:00+05:30').getTime();
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                if (distance < 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // ---------- Copy Address ----------
+            document.getElementById('copyAddressBtn').addEventListener('click', function() {
+                const address = "Classic Banquet Hall, No.831, 4th Block, HBR Layout, Bangalore 560043";
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(address).then(() => {
+                        this.textContent = '✅ Copied!';
+                        setTimeout(() => { this.textContent = '📋 Copy Address'; }, 2000);
+                    }).catch(() => fallbackCopy(address, this));
+                } else {
+                    fallbackCopy(address, this);
+                }
+            });
+
+            function fallbackCopy(text, btn) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    btn.textContent = '✅ Copied!';
+                    setTimeout(() => { btn.textContent = '📋 Copy Address'; }, 2000);
+                } catch (e) {
+                    alert('Copy failed. Please copy manually.');
+                }
+                document.body.removeChild(textarea);
+            }
+
+            // ---------- Scratch Card ----------
+            const canvas = document.getElementById('scratchCanvas');
+            const scratchContent = document.getElementById('scratchContent');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                const rect = scratchContent.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
+                ctx.fillStyle = '#C9A96E';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#B8944F';
+                for (let i = 0; i < 50; i++) {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI*2);
+                    ctx.fill();
+                }
+                ctx.font = '14px Montserrat';
+                ctx.fillStyle = '#FDF8F0';
+                ctx.textAlign = 'center';
+                ctx.fillText('Scratch here', canvas.width/2, canvas.height/2);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let isScratching = false;
+            function scratch(x, y) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 25, 0, Math.PI*2);
+                ctx.fill();
+                ctx.globalCompositeOperation = 'source-over';
+            }
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+            canvas.addEventListener('mousedown', (e) => {
+                isScratching = true;
+                const pos = getPos(e);
+                scratch(pos.x, pos.y);
+            });
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isScratching) return;
+                const pos = getPos(e);
+                scratch(pos.x, pos.y);
+                checkReveal();
+            });
+            canvas.addEventListener('mouseup', () => { isScratching = false; });
+            canvas.addEventListener('mouseleave', () => { isScratching = false; });
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isScratching = true;
+                const pos = getPos(e);
+                scratch(pos.x, pos.y);
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!isScratching) return;
+                const pos = getPos(e);
+                scratch(pos.x, pos.y);
+                checkReveal();
+            });
+            canvas.addEventListener('touchend', () => { isScratching = false; });
+
+            function checkReveal() {
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const pixels = imageData.data;
+                let transparentPixels = 0;
+                for (let i = 3; i < pixels.length; i += 4) {
+                    if (pixels[i] === 0) transparentPixels++;
+                }
+                const totalPixels = canvas.width * canvas.height;
+                if (transparentPixels / totalPixels > 0.5) {
+                    canvas.style.opacity = '0';
+                    canvas.style.pointerEvents = 'none';
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
